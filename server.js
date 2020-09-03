@@ -19,7 +19,8 @@ mongoose
 .then(()=>console.log('MongoDB successufully connected..'))
 .catch(err=> console.log('conenction failed : ',err)) 
 
-
+// const Item = require('./models/Items');
+// Item.find().then((item)=>console.log(item))
 
 
 // Use routes

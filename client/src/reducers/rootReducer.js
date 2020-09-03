@@ -1,13 +1,8 @@
-import { GET_ITEMS, DELETE_ITEM, ADD_ITEM } from "../actions/types";
+import { GET_ITEMS, DELETE_ITEM, ADD_ITEM, ITEMS_LOADING, DELETE_ALL } from "../actions/types";
 
 const initialState =  {
-    items : [
-        {id: 1, name:'Milk'},
-        {id: 2, name:'Meat'},
-        {id: 3, name:'Water'},
-        {id: 4, name:'Steak'},
-        {id: 5, name:'Bread'}
-    ]
+    items : [],
+    loading : false
 };
 
 function rootReducer (state=initialState,action) {
@@ -15,20 +10,33 @@ function rootReducer (state=initialState,action) {
     switch (action.type){
         case GET_ITEMS :
             return {
-                ...state
+                ...state,
+                items : action.payload ,
+                loading : false
             };
         case DELETE_ITEM :
-            console.log(action.payload)
-
             return {
                 ...state,
-                items : state.items.filter(item => item.id !== action.payload)
+                items : state.items.filter(item => item._id !== action.payload)
             }
-        case ADD_ITEM :
-            console.log(action)
+        case DELETE_ALL : 
             return {
                 ...state,
-                items : [...state.items, action.payload]
+                items : action.payload,
+                loading: false
+            };
+            
+        case ADD_ITEM :
+        
+            return {
+                ...state,
+                items : [action.payload, ...state.items],
+                loading : false
+            }
+        case ITEMS_LOADING :
+            return {
+                ...state,
+                loading : true
             }
         default :
             return state;

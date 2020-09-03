@@ -1,6 +1,4 @@
-import React from 'react'
-import {useState} from 'react'
-import uuid from 'react-uuid'
+import React, {  useState } from 'react'
 
 import {Button,Modal,ModalHeader,ModalBody,Form,FormGroup,Label,Input} from 'reactstrap';
 import {connect} from 'react-redux';
@@ -8,7 +6,8 @@ import {addItem} from '../actions/itemActions'
 
 function AddItem(props) {
     const [modal,setModal] = useState(false);
-    const [name,setName] = useState("")
+    const [name,setName] = useState("");
+
 
    const toggle = () => {
         setModal(!modal)
@@ -18,17 +17,17 @@ function AddItem(props) {
         setName(e.target.value);
    } 
 
+
    const onSubmit = (e) => {
     e.preventDefault();
-
+    
     const newItem = {
-        id : uuid(),
+
         name : name
     }
 
     props.addItem(newItem);
-    toggle();
-
+    toggle();     
    }
 
     return (
@@ -49,8 +48,8 @@ function AddItem(props) {
                 <ModalBody>
                     <Form onSubmit={onSubmit}>
                         <FormGroup>
-                            <Label for="item">Item</Label>
-                            <Input type ="text" name="name" id="item" placeholder="add an item here" onChange={onChange}/>
+                            <Label for="item">New item : </Label>
+                            <Input type ="text" name="name" id="item" placeholder="add an item here" required onChange={onChange}/>
                         </FormGroup>
                     </Form>
                 </ModalBody>
@@ -59,10 +58,7 @@ function AddItem(props) {
     )
 }
 
-const mapStateToProps = state => {
-    return {
-        items: state.items
-    }
-}
 
-export default connect(mapStateToProps,{addItem}) (AddItem);
+
+
+export default connect(null,{addItem}) (AddItem);

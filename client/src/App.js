@@ -6,6 +6,7 @@ import NavbarMenu from './components/Navbar';
 import ShoppingList from './components/ShoppingList';
 import AddItem from './components/AddItem';
 import { Container } from 'reactstrap';
+import Loader from './components/Loader';
 
 
 function App() {
@@ -15,7 +16,9 @@ function App() {
       <Container>
         <AddItem/>
         <ShoppingList/>
+        <Loader/>
       </Container>
+      
     </div>
   );
 }
