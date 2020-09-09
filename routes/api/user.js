@@ -16,12 +16,12 @@ router.post("/", (req, res) => {
 
   //   Simple validation
   if (!username || !email || !password) {
-    return res.status(400).json({ msg: "please enter all fields" });
+    return res.status(400).json( {msg: "Please enter all fields"} );
   }
 
   // Check for existing user
   User.findOne({ email }).then((user) => {
-    if (user) return res.status(400).json({ msg: "user already exists" });
+    if (user) return res.status(400).json({ msg: "User already exists" });
 
     // Register new user
     const newUser = new User({

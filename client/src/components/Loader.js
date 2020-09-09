@@ -3,9 +3,10 @@ import { connect, useSelector } from "react-redux";
 import loader from "../loader.gif";
 
 function Loader() {
-  const loading = useSelector((state) => state.loading);
+  const loading = useSelector((state) => state.item.loading);
+  const isLoading = useSelector((state) => state.auth.isLoading)
 
-  if(!loading) return null ;
+  if(!loading || !isLoading) return null ;
 
   return (
     <div className="loader-container">

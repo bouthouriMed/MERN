@@ -12,12 +12,13 @@ const Item = require("../../models/Items");
 router.get("/", (req, res) => {
   Item.find()
     .sort({ date: -1 })
-    .then((items) => res.json(items));
+    .then((items) => res.json(items))
+    .catch(err => res.json({msg : 'failed to load'}))
 });
 
 // @route  POST api/items
 // @desc   Create  a new item
-// @access Private
+// @access PrivatE
 
 router.post("/", auth, (req, res) => {
   const newItem = new Item({
@@ -42,7 +43,7 @@ router.delete("/:id", auth, (req, res) => {
 // @route  DELETE api/items
 // @desc   Delete all items
 // @access Private
-router.delete("/",(req, res) => {
+router.delete("/", auth, (req, res) => {
   Item.remove({}, (err) => {
     if (err) throw err;
   }).then(() => Item.find().then((items) => res.json(items)));

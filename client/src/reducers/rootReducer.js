@@ -1,47 +1,10 @@
-import { GET_ITEMS, DELETE_ITEM, ADD_ITEM, ITEMS_LOADING, DELETE_ALL } from "../actions/types";
+import { combineReducers } from 'redux' ;
+import itemReducer from './itemReducer' ;
+import authReducer from './authReducer' ;
+import errorReducer from './errorReducer' ;
 
-const initialState =  {
-    items : [],
-    loading : false
-};
-
-function rootReducer (state=initialState,action) {
-  
-    switch (action.type){
-        case GET_ITEMS :
-            return {
-                ...state,
-                items : action.payload ,
-                loading : false
-            };
-        case DELETE_ITEM :
-            return {
-                ...state,
-                items : state.items.filter(item => item._id !== action.payload)
-            }
-        case DELETE_ALL : 
-            return {
-                ...state,
-                items : action.payload,
-                loading: false
-            };
-            
-        case ADD_ITEM :
-        
-            return {
-                ...state,
-                items : [action.payload, ...state.items],
-                loading : false
-            }
-        case ITEMS_LOADING :
-            return {
-                ...state,
-                loading : true
-            }
-        default :
-            return state;
-    }
-}
-
-
-export default rootReducer;
+export default combineReducers({
+    item : itemReducer,
+    auth : authReducer ,
+    error : errorReducer
+})

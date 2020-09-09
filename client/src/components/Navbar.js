@@ -1,29 +1,59 @@
-import React, { useState } from 'react';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import React, { useState } from "react";
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+} from "reactstrap";
+import { connect, useSelector } from "react-redux";
+
+import Logout from "./auth/Logout";
 
 const NavbarMenu = (props) => {
   const [collapsed, setCollapsed] = useState(true);
 
   const toggleNavbar = () => setCollapsed(!collapsed);
 
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const user = useSelector((state) => state.auth.user);
+
   return (
     <div>
-      <Navbar color="dark" dark dark-expand="sm" className="mb-5">
-        <NavbarBrand href="/" className="mr-auto">Sopping list</NavbarBrand>
+      <Navbar color="dark" dark expand="sm" className="mb-5">
+        <NavbarBrand href="/" className="mr-auto">
+          Shopping list
+        </NavbarBrand>
         <NavbarToggler onClick={toggleNavbar} className="mr-2" />
         <Collapse isOpen={!collapsed} navbar>
-          <Nav navbar>
+          <Nav navbar className="ml-auto">
             <NavItem>
-              <NavLink href="/components/">GoMyCode</NavLink>
+              <NavLink>
+                {isAuthenticated === true ? (
+                  <span>{`Welcome ${user.username}`}</span>
+                ) : null}
+              </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
+              <NavLink href="https://gomycode.tn/" target="blank">
+                GoMyCode
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="https://github.com/bouthouriMed/" target="blank">
+                GitHub
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <Logout />
             </NavItem>
           </Nav>
         </Collapse>
       </Navbar>
     </div>
   );
-}
+};
 
-export default NavbarMenu;
+export default connect()(NavbarMenu);

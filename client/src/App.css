@@ -4,8 +4,13 @@
 
 .removeAll-btn {
     margin-top : 1.5rem;
-    width:100%
+    width:100%;
 }
+
+.shopping-list {
+    border-radius: 5px;
+}
+
 
 .loader-container {
     position: fixed;
@@ -19,4 +24,21 @@
     top : 50%;
     z-index: 1000;
     position: absolute;
+}
+
+.vertical-center {
+    min-height: 100%;
+    min-height: 100vh;
+
+    display:flex;
+    align-items: center;
+
+    color:white;
+
+}
+
+body {
+    background-image: url("./assets/fabio-oyXis2kALVg-unsplash.jpg");
+    background-blend-mode: darken;
+
 }

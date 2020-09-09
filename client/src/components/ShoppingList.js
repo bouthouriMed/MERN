@@ -6,7 +6,7 @@ import { connect, useSelector, useDispatch } from "react-redux";
 import { getItems, deleteItem, deleteAll } from "../actions/itemActions";
 
 const ShoppingList = () => {
-  const items = useSelector((state) => state.items);
+  const items = useSelector((state) => state.item.items);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,12 +23,12 @@ const ShoppingList = () => {
 
   const shoppingList = items.length ? (
     <Container>
-      <ListGroup>
+      <ListGroup className='shopping-list'>
         <TransitionGroup className="shopping-list">
           {items.map((item) => {
             return (
               <CSSTransition timeout={500} classNames="fade" key={item._id}>
-                <ListGroupItem>
+                <ListGroupItem >
                   <Button
                     color="danger"
                     size="sm"
